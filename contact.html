@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset='utf-8' />
+        <title>Contact</title>
+        <meta name='viewport'
+            content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+        <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
+        <link rel="stylesheet" href="css/styles/style.css">
+        <link
+            href="https://fonts.googleapis.com/css?family=Montserrat:200,300,400,700"
+            rel="stylesheet">
+        <script
+            src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.54.0/mapbox-gl.js'></script>
+        <link
+            href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.54.0/mapbox-gl.css'
+            rel='stylesheet' />
+        <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        #map {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 50%;
+        }
+    </style>
+    </head>
+
+    <body>
+        <header>
+            <div class="container">
+                <nav class="navbar navbar-light navbar-expand-sm">
+                    <a href="index.html" class="navbar-brand text-dark
+                        font-weight-bolder">Celmo.</a>
+                    <button class="navbar-toggler" data-toggle="collapse"
+                        data-target="#navbar-menu">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div id="navbar-menu" class="collapse navbar-collapse">
+                        <ul class="navbar-nav d-flex flex-row ml-auto">
+                            <li class="nav-item mr-2">
+                                <a class="nav-link" href="about.html"> about us</a>
+                            </li>
+                            <li class="nav-item mr-2">
+                                <a class="nav-link" href="services.html">
+                                    services</a>
+                            </li>
+                            <li class="nav-item mr-2">
+                                <a class="nav-link" href="works.html"> works</a>
+                            </li>
+                            <li class="nav-item mr-2">
+                                <a class="nav-link" href="blogs.html"> blog</a>
+                            </li>
+                            <li class="nav-item mr-2">
+                                <a class="nav-link" href="contact.html"> Contact</a>
+                                <div class="hr-underline ml-2"></div>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+            <main style="margin-left: 50rem;">
+                <div class="row ml-2 w-75 mt-5 rounded shadow-lg">
+                    <div class="alert alert-light">
+                        <p class="font-weight-bold text-dark">Contact our sales
+                            team</p>
+                        <form action="">
+                            <div class="row">
+                                <div class="col-12">
+                                    <input class="form-control w-100"
+                                        type="text"
+                                        placeholder="Your name" required>
+                                </div>
+                                <div class="col-12">
+                                    <input class="form-control w-100"
+                                        type="email"
+                                        placeholder="Company email">
+                                </div>
+                                <div class="col-12">
+                                    <input class="form-control w-100"
+                                        type="text"
+                                        placeholder="phone">
+                                </div>
+                                <div class="col-12">
+                                    <input class="form-control w-100"
+                                        type="text"
+                                        placeholder="Job Title">
+                                </div>
+                                <div class="col-12">
+                                    <input class="form-control w-100"
+                                        type="text"
+                                        placeholder="Country">
+                                </div>
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-info
+                                        w-100" href="">Get
+                                        in
+                                        touch</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </main>
+        </header>
+
+        <div id='map'></div>
+
+        <script>
+        mapboxgl.accessToken = 'pk.eyJ1IjoibnR3YXJpYmxhaXNlIiwiYSI6ImNqdG8xYzF3cTB0MWM0OXBkZjV4YTViazAifQ.-HdQxOt30AnbsxA7cjuvSA';
+
+        var map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/streets-v9'
+        });
+
+        var size = 200;
+
+        var pulsingDot = {
+            width: size,
+            height: size,
+            data: new Uint8Array(size * size * 4),
+
+            onAdd: function () {
+                var canvas = document.createElement('canvas');
+                canvas.width = this.width;
+                canvas.height = this.height;
+                this.context = canvas.getContext('2d');
+            },
+
+            render: function () {
+                var duration = 1000;
+                var t = (performance.now() % duration) / duration;
+
+                var radius = size / 2 * 0.3;
+                var outerRadius = size / 2 * 0.7 * t + radius;
+                var context = this.context;
+
+                // draw outer circle
+                context.clearRect(0, 0, this.width, this.height);
+                context.beginPath();
+                context.arc(this.width / 2, this.height / 2, outerRadius, 0, Math.PI * 2);
+                context.fillStyle = 'rgba(255, 200, 200,' + (1 - t) + ')';
+                context.fill();
+
+                // draw inner circle
+                context.beginPath();
+                context.arc(this.width / 2, this.height / 2, radius, 0, Math.PI * 2);
+                context.fillStyle = 'rgba(255, 100, 100, 1)';
+                context.strokeStyle = 'white';
+                context.lineWidth = 2 + 4 * (1 - t);
+                context.fill();
+                context.stroke();
+
+                // update this image's data with data from the canvas
+                this.data = context.getImageData(0, 0, this.width, this.height).data;
+
+                // keep the map repainting
+                map.triggerRepaint();
+
+                // return `true` to let the map know that the image was updated
+                return true;
+            }
+        };
+
+        map.on('load', function () {
+
+            map.addImage('pulsing-dot', pulsingDot, { pixelRatio: 2 });
+
+            map.addLayer({
+                "id": "points",
+                "type": "symbol",
+                "source": {
+                    "type": "geojson",
+                    "data": {
+                        "type": "FeatureCollection",
+                        "features": [{
+                            "type": "Feature",
+                            "geometry": {
+                                "type": "Point",
+                                "coordinates": [-113.323975,53.631611, ]
+                            }
+                        }]
+                    }
+                },
+                "layout": {
+                    "icon-image": "pulsing-dot"
+                }
+            });
+        });
+// Add zoom and rotation controls to the map.
+map.addControl(new mapboxgl.NavigationControl());
+    </script>
+    </body>
+
+</html>

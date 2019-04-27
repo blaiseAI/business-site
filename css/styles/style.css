@@ -1,0 +1,184 @@
+
+    body{
+        font-family: 'Montserrat', sans-serif;
+    }
+
+     /*
+            Header
+        */
+        .theme-contain-color{
+            background-image: linear-gradient(135deg, #fdfcfb 0%, #e2d1c3 100%);
+        }
+        .header{
+            background: #ffe1bd;
+        }
+        header .badge:hover{
+            background:linear-gradient(135deg, #fdfcfb 0%, #e2d1c3 100%);
+            color:black;
+            cursor: pointer;
+        }
+        .center-flex-column {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .social-media-circle{
+            width: 2.5rem;
+            height: 2.5rem;
+            line-height: 2.5rem;
+            border-radius: 50%;
+            text-align: center;
+           
+
+            /* margin-bottom: 1rem; */
+        }
+        .social-media-circlex{
+            width: 3rem;
+            height: 3rem;
+            line-height: 3rem;
+            border-radius: 50%;
+            text-align: center;
+           
+
+            /* margin-bottom: 1rem; */
+        }
+        .social-media-circlex a{
+            color: #fff;
+        }
+        .social-media-circle a{
+            color: #000;
+        }
+        /* .rot:hover{
+            padding: 1rem;
+            border: 1px solid saddlebrown;
+        } */
+        .social-media-circle{
+            background: #fff;
+        }
+        .social-media-circlex{
+            background: #000;
+        }
+        
+        .social-media-circle:hover{
+            background: #ffe1bd;
+            transform: scale(2);
+            transition: all 300ms;
+        }
+        .social-media-circlex:hover{
+            background: #ffe1bd;
+            transition: all 300ms;
+        }
+        
+        .dot {
+            width: 1rem;
+            height: 1rem;
+            border-radius: 50%;
+            margin-bottom: 1rem;
+            cursor: pointer;
+        }
+
+        .dot-stroke {
+            border: 1px solid #000;
+        }
+
+        .dot-fill {
+            background: #000;
+        }
+
+        .hr {
+            width: 50px;
+            border-bottom: 3px solid #000;
+        }
+        a{
+            color: #343a40;
+
+        }
+        a:hover{
+            text-decoration: none;
+            color: #78797a;
+        }
+        .hr-underline {
+            width: 30px;
+            border-bottom: 2px solid #000;
+        }
+        .hr-sm-line{
+            width: 50px;
+            background: #fff;
+            height: 3px;
+        }
+        
+        input,textarea{
+            background: #343a40;
+            border: none;
+            color: #ffffff;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid #78797a;
+        }
+        .active{
+            text-decoration: none;
+        }
+        .breadcrumb{
+            display: none;
+        }
+        textarea{
+            height: 10vh;
+            resize: none;
+        }
+        .arrow-slide{
+            display: none;
+        }
+        h2:hover{
+            color:#ffe1bd;
+            cursor: pointer;
+        }
+        .btn-more:hover{
+            border: 0.5px solid #78797a;
+            cursor: pointer;
+        }
+        .btn{
+            border: #000 !important;
+            border-radius: 2rem !important;
+        }
+        .btn:hover{
+            background: #ffe1bd;
+            border: none;
+            transition: all 300ms;
+        }
+        .active a{
+            border-bottom: 1px solid #000;
+        }
+        /* a:hover {
+            border-bottom: 2px solid #ffe1bd;
+        } */
+        /* .circle {
+            width: 168px;
+            height: 168px;
+            border-radius: 50%;
+            overflow: hidden;
+        } */
+
+        /*
+            End of the header
+        */
+        .center-content{
+            max-width: 960;
+            margin: 0 auto;
+        }
+        /* .col-1 p{
+            display: none;
+        } */
+        @media all and (min-width: 760px) {
+            .col-1 p{
+                display: flex;
+            }
+            .arrow-slide{
+                display: block;
+            }
+            .breadcrumb
+            {
+                display: flex;
+                background: rgba(216, 213, 213, 0);
+            }
+        }
